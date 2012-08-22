@@ -2,7 +2,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-
 public class FileMoveTest {
 
 	public static void main(String[] args) {

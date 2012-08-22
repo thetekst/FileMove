@@ -6,10 +6,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
+@SuppressWarnings("serial")
 public class FileMoveJPanel extends JPanel{
 	
 	JLabel moveFrom;
 	JLabel moveTo;
+	JLabel informer;
 	JTextField jTextOne;
 	JTextField jTextTwo;
 	JButton browse1;
@@ -18,7 +20,7 @@ public class FileMoveJPanel extends JPanel{
 	
 	public FileMoveJPanel(){
 		
-		GridLayout gl = new GridLayout(3,3);
+		GridLayout gl = new GridLayout(3,3,2,2);
 		setLayout(gl);
 		
 		moveFrom = new JLabel("moveFrom");
@@ -28,6 +30,7 @@ public class FileMoveJPanel extends JPanel{
 		browse1 = new JButton("Browse");
 		browse2 = new JButton("Browse");
 		button = new JButton("Move");
+		informer = new JLabel("");
 		
 		add(moveFrom);
 		add(jTextOne);
@@ -36,13 +39,12 @@ public class FileMoveJPanel extends JPanel{
 		add(jTextTwo);
 		add(browse2);
 		add(button);
+		add(informer);
 
 		FileMoveActionListener fileMove = new FileMoveActionListener(this);
 		browse1.addActionListener(fileMove);
 		browse2.addActionListener(fileMove);
 		button.addActionListener(fileMove);
 	}
-	
-	
 
 }

@@ -1,5 +1,6 @@
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class FileMoveJFrame extends JFrame {
 	
 	FileMoveJPanel panel;

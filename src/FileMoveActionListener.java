@@ -12,8 +12,9 @@ public class FileMoveActionListener implements ActionListener {
 	JFileChooser jFileOne;
 	File file1;
 	File file2;
-	String str1;
-	String str2;
+	String fileGetPath1;
+	String fileGetPath2;
+	String textField2;
 	String nameFile1;
 
 	static int countPressed = 0;
@@ -38,50 +39,62 @@ public class FileMoveActionListener implements ActionListener {
 			if (src == parent.browse1){
 				
 				if(ret == JFileChooser.APPROVE_OPTION) {
-					 file1 = jFileOne.getSelectedFile(); 
-				} else{
 					
+					file1 = jFileOne.getSelectedFile(); 
+					fileGetPath1 = file1.getPath();
+					parent.jTextOne.setText(fileGetPath1);
+					nameFile1 = file1.getName();
+						
+				} else if(ret == JFileChooser.CANCEL_OPTION){
+					file1 = null;
+					System.out.println("Файл 1 не выбран");
 				}
-				
-				str1 = file1.getPath();
-				nameFile1 = file1.getName();
-				parent.jTextOne.setText(str1);
-				
+
 			} else{
 				
 				if(ret == JFileChooser.APPROVE_OPTION) {
-					 file2 = jFileOne.getSelectedFile(); 
+					
+					file2 = jFileOne.getSelectedFile(); 
+					
+					fileGetPath2 = file2.getPath();
+					parent.jTextTwo.setText(fileGetPath2 + "\\" + nameFile1);
+					
+					
+				} else if(ret == JFileChooser.CANCEL_OPTION){
+					
+					file2 = null;
+					System.out.println("Файл 2 не выбран");
 				}
-				
-				str2 = file2.getPath();
-				parent.jTextTwo.setText(str2 + "\\" + nameFile1);
+
 			}
-		} else if(src == parent.button){
+		} else if(src == parent.button && file1 !=null){
 			countPressed++;
 			String text = parent.button.getText();
 			String out = String.format("%s %d", text, countPressed);
 			System.out.println(out);
 			
-			String textField2 = parent.jTextTwo.getText();
-			
-			
+			System.out.println("Выбираем путь к файлу вручную");
+			textField2 = parent.jTextTwo.getText();
 			file2 = new File(textField2);
 			
 			String strEquals1 = file1.getPath();
 			String strEquals2 = file2.getPath();
-			
+
 			System.out.println("moveFrom: " + strEquals1);
-			System.out.println("moveTo: " + strEquals2);
+			System.out.println("  moveTo: " + strEquals2);
 
 			File newF2 = new File(textField2);
 			
 			if (newF2.exists()){
 				newF2.delete();
 			}
-		
+
 			file1.renameTo(newF2);
 			System.out.println("Файл успешно перемещен");
 			
+			parent.jTextOne.setText("");
+			parent.jTextTwo.setText("");
+			parent.informer.setText("Complate");
 		}
 
 	}
